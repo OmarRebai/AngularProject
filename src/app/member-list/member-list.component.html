@@ -1,0 +1,48 @@
+<div fxLayout="row" fxLayoutAlign="end center">
+  <button mat-raised-button color="primary" routerLink="/create">
+    Create new
+  </button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>Name</th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="cin">
+    <th mat-header-cell *matHeaderCellDef>CIN</th>
+    <td mat-cell *matCellDef="let element">{{ element.cin }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="createdDate">
+    <th mat-header-cell *matHeaderCellDef>Created Date</th>
+    <td mat-cell *matCellDef="let element">{{ element.createdDate }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="cv">
+    <th mat-header-cell *matHeaderCellDef>CV</th>
+    <td mat-cell *matCellDef="let element">
+      <a href="{{ element.cv }}"><mat-icon>picture_as_pdf</mat-icon></a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef>Type</th>
+    <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+  </ng-container>
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef>edit</th>
+    <td mat-cell *matCellDef="let element">
+      <a routerLink="/edit/{{ element.id }}"><mat-icon>edit</mat-icon></a>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

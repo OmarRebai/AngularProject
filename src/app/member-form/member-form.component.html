@@ -1,0 +1,19 @@
+<form class="signin-form" [formGroup]="form" (ngSubmit)="addMember()">
+  <mat-form-field>
+    <mat-label>CIN</mat-label>
+    <input matInput formControlName="cin" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>CV</mat-label>
+    <input matInput formControlName="cv" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Type</mat-label>
+    <input matInput formControlName="type" />
+  </mat-form-field>
+  <button type="submit" mat-raised-button color="primary">Add member</button>
+</form>
