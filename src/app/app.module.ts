@@ -29,7 +29,7 @@ import { FirebaseModule } from './Firebase.module';
 import { LoginComponent } from './login/login.component';
 import { MatCardModule } from '@angular/material/card';
 import { EventCreateComponent } from './event-create/event-create.component';
-
+import { NgChartsModule } from 'ng2-charts';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
@@ -73,6 +73,7 @@ import { ToolsCreateComponent } from './tools-create/tools-create.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatDialogModule,
+    NgChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

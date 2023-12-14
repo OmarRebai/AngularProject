@@ -2,7 +2,7 @@
   "name": "lab2023",
   "version": "0.0.0",
   "scripts": {
-    "gen": "ng g c --module=app.module",
+    "g c": "ng g c --module=app.module",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
@@ -23,7 +23,9 @@
     "@angular/platform-browser": "^16.0.0",
     "@angular/platform-browser-dynamic": "^16.0.0",
     "@angular/router": "^16.0.0",
+    "chart.js": "^4.4.1",
     "firebase": "^10.7.0",
+    "ng2-charts": "^5.0.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
