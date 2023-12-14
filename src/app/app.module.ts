@@ -16,9 +16,39 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { LayoutComponent } from './layout/layout.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { ArticlesComponent } from './articles/articles.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { ToolsComponent } from './tools/tools.component';
+import { EventsComponent } from './events/events.component';
+import { FirebaseModule } from './Firebase.module';
+import { LoginComponent } from './login/login.component';
+import { MatCardModule } from '@angular/material/card';
+import { EventCreateComponent } from './event-create/event-create.component';
 
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { ToolsCreateComponent } from './tools-create/tools-create.component';
 @NgModule({
-  declarations: [AppComponent, MemberListComponent, MemberFormComponent],
+  declarations: [
+    AppComponent,
+    MemberListComponent,
+    MemberFormComponent,
+    LayoutComponent,
+    ArticlesComponent,
+    DashboardComponent,
+    ToolsComponent,
+    EventsComponent,
+    LoginComponent,
+    EventCreateComponent,
+    ToolsCreateComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,6 +64,15 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     ReactiveFormsModule,
     HttpClientModule,
     FlexLayoutModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatMenuModule,
+    FirebaseModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

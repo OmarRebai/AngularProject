@@ -24,5 +24,48 @@
       "cv": "lien",
       "type": "Enseignant"
     }
+  ],
+  "events": [
+    {
+      "id": "1",
+      "title": "PYFAC7",
+      "dateDebut": "11/12/2023",
+      "dateFin": "12/14/2023",
+      "lieu": "sfax, marasim"
+    },
+    {
+      "id": "2",
+      "title": "PYFAC8",
+      "dateDebut": "11/12/2024",
+      "dateFin": "12/14/2024",
+      "lieu": "sfax, marasim"
+    },
+    {
+      "id": "3",
+      "title": "PYFAC9",
+      "dateDebut": "11/12/2025",
+      "dateFin": "12/14/2025",
+      "lieu": "sfax, marasim"
+    }
+  ],
+  "tools": [
+    {
+      "id": "1",
+      "createur": "nnn",
+      "date": "11/12/2024",
+      "source": "string"
+    },
+    {
+      "id": "2",
+      "createur": "bb",
+      "date": "11/12/2024",
+      "source": "string"
+    },
+    {
+      "id": "3",
+      "createur": "aa",
+      "date": "11/12/2024",
+      "source": "string"
+    }
   ]
 }

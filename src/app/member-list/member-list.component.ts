@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Member } from 'src/models/member';
 import { GLOBAL } from '../app-config';
-const ELEMENT_DATA: Member[] = GLOBAL._DB.members;
+import { MemberService } from 'src/services/member.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-member-list',
@@ -9,6 +10,7 @@ const ELEMENT_DATA: Member[] = GLOBAL._DB.members;
   styleUrls: ['./member-list.component.css'],
 })
 export class MemberListComponent {
+  constructor(private memberService: MemberService) {}
   displayedColumns: string[] = [
     'id',
     'cin',
@@ -16,7 +18,23 @@ export class MemberListComponent {
     'createdDate',
     'cv',
     'type',
-    'edit',
+    'actions',
   ];
-  dataSource = ELEMENT_DATA;
+  dataSource = new MatTableDataSource(this.memberService.tab);
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  fetch(): void {
+    this.memberService.getAllMembers().subscribe((tab) => {
+      this.dataSource = new MatTableDataSource(tab);
+    });
+  }
+  handleButtonClick(id: string): void {
+    //lancer la boite
+    this.memberService.deleteMemberById(id).subscribe(() => {
+      this.fetch();
+    });
+  }
 }

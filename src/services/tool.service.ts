@@ -3,46 +3,46 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { GLOBAL } from 'src/app/app-config';
 import { environment } from 'src/environments/environment.development';
-import { Member } from 'src/models/member';
+import { Tool } from 'src/models/tool';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MemberService {
+export class ToolService {
   private apiServiceUrl = environment.apiBaseUrl;
   //Test Local
-  tab: Member[] = GLOBAL._DB.members;
+  tab: Tool[] = GLOBAL._DB.tools;
 
   constructor(private http: HttpClient) {}
 
-  addMember(member: Member): Observable<Member> {
-    // return this.http.post<Member>(
-    //   `${this.apiServiceUrl}/api/v1/members`,
-    //   member
+  addTool(Tool: Tool): Observable<Tool> {
+    // return this.http.post<Tool>(
+    //   `${this.apiServiceUrl}/api/v1/Tools`,
+    //   Tool
     // );
     // console.log('marche très bien');
-    // this.tab.unshift(member);
-    this.tab = [member, ...this.tab.filter((item) => item.id != member.id)];
+    // this.tab.unshift(Tool);
+    this.tab = [Tool, ...this.tab.filter((item) => item.id != Tool.id)];
     return new Observable((observer) => {
-      observer.next(member);
+      observer.next(Tool);
     });
   }
 
-  getMemberById(id: String): Observable<Member> {
-    // return this.http.get<Member>(`${this.apiServiceUrl}/api/v1/members/${id}`);
+  getToolById(id: String): Observable<Tool> {
+    // return this.http.get<Tool>(`${this.apiServiceUrl}/api/v1/Tools/${id}`);
 
     return new Observable((observer) => {
       observer.next(this.tab.find((item) => item.id == id));
     });
   }
 
-  editMember(member: Member): Observable<Member> {
+  editTool(Tool: Tool): Observable<Tool> {
     return new Observable((observer) => {
-      observer.next(member);
+      observer.next(Tool);
     });
   }
 
-  deleteMemberById(id: string): Observable<void> {
+  deleteToolById(id: string): Observable<void> {
     //return this.httpClient.delete<void>('http://localhost:9000/MEMBRE-SERVICE/delete..'+id);
 
     this.tab = this.tab.filter((item) => item.id != id);
@@ -51,8 +51,8 @@ export class MemberService {
     });
   }
 
-  getAllMembers(): Observable<Member[]> {
-    //return this.httpClient.get<Member[]>('http://localhost:9000/MEMBRE-SERVICE/members');
+  getAllTools(): Observable<Tool[]> {
+    //return this.httpClient.get<Tool[]>('http://localhost:9000/MEMBRE-SERVICE/Tools');
 
     return new Observable((observer) => {
       observer.next(this.tab);

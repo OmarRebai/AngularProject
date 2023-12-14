@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { MatMiniFabAnchor } from '@angular/material/button';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Member } from 'src/models/member';
 import { MemberService } from 'src/services/member.service';
 
@@ -12,13 +13,29 @@ import { MemberService } from 'src/services/member.service';
 })
 export class MemberFormComponent implements OnInit {
   form!: FormGroup;
+  member!: Member;
   constructor(
     private readonly fb: FormBuilder,
     private memberService: MemberService,
+    private route: ActivatedRoute,
     private router: Router
   ) {}
   ngOnInit(): void {
-    this.initForm();
+    this.route.params.subscribe((params) => {
+      if (!!params['id']) {
+        this.memberService.getMemberById(params['id']).subscribe({
+          next: (response: Member) => {
+            this.member = response;
+            this.initFormEdit(response);
+          },
+          error: (error: HttpErrorResponse) => {
+            alert(error.message);
+          },
+        });
+      } else {
+        this.initForm();
+      }
+    });
   }
 
   initForm(): void {
@@ -29,14 +46,26 @@ export class MemberFormComponent implements OnInit {
       type: this.fb.control(null, [Validators.required]),
     });
   }
+  initFormEdit(member: Member): void {
+    this.form = this.fb.group({
+      cin: this.fb.control(member.cin, [Validators.required]),
+      name: this.fb.control(member.name, [Validators.required]),
+      cv: this.fb.control(member.cv, []),
+      type: this.fb.control(member.type, [Validators.required]),
+    });
+  }
 
   addMember(): void {
-    const member = {
+    const member1 = {
+      ...this.member,
       ...this.form.value,
-      id: Math.ceil(Math.random() * 1000),
-      createdDate: new Date().toLocaleDateString(),
     };
-    this.memberService.addMember(member).subscribe({
+    const member2 = {
+      ...member1,
+      id: member1.id ?? Math.ceil(Math.random() * 1000),
+      createdDate: member1.createdDate ?? new Date().toLocaleDateString(),
+    };
+    this.memberService.addMember(member1).subscribe({
       next: (response: Member) => {
         console.log(response);
         this.router.navigate(['/members']);
