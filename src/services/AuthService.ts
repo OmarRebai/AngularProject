@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/app';
 
 import * as auth from 'firebase/auth';
+import { CookieOptions, CookieService } from 'ngx-cookie-service';
 @Injectable({
   providedIn: 'root',
 })

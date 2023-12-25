@@ -109,9 +109,6 @@ export class ToolsComponent {
           this.fetch();
         }
       });
-      // this.tool.createur = result.createur;
-      // this.tool.date = result.date;
-      // this.tool.source = result.source;
     });
   }
 }
