@@ -57,7 +57,6 @@ export class EventCreateComponent implements OnInit {
   }
 
   addEvent(): void {
-    // console.log(this.form.value);
     const event1 = {
       ...this.event,
       ...this.form.value,

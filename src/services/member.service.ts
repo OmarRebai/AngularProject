@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, count } from 'rxjs';
 import { GLOBAL } from 'src/app/app-config';
 import { environment } from 'src/environments/environment.development';
 import { Member } from 'src/models/member';
@@ -57,5 +57,29 @@ export class MemberService {
     return new Observable((observer) => {
       observer.next(this.tab);
     });
+  }
+  count: number = 0;
+  tabPub: number[] = [];
+  getNbPubMembers(): Observable<number[]> {
+    for (let i = 0; i < this.tab.length; i++) {
+      this.count = this.tab[i].tab_pub.length;
+      this.tabPub.push(this.count);
+    }
+    return new Observable<number[]>((observer) => observer.next(this.tabPub));
+  }
+  countTeacher: number = 0;
+  countStudent: number = 0;
+  tabCount: number[] = [];
+  getNbTypeMembers(): Observable<number[]> {
+    for (let i = 0; i < this.tab.length; i++) {
+      if (this.tab[i].type === 'chercheur') {
+        this.countTeacher++;
+      } else {
+        this.countStudent++;
+      }
+    }
+    this.tabCount.push(this.countTeacher);
+    this.tabCount.push(this.countStudent);
+    return new Observable<number[]>((observer) => observer.next(this.tabCount));
   }
 }

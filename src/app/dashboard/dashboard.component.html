@@ -24,12 +24,26 @@
     </mat-card-header>
   </mat-card>
 </div>
-<div class="chart-wrapper">
-  <canvas baseChart
-          [type]="'line'"
-    [datasets]="chartData"
-    [labels]="chartLabels"
-    [options]="chartOptions"
+
+<div fxLayout="row" fxLayoutAlign="space-around center">
+  <div class="col-6">
+    <canvas
+      baseChart
+      [type]="'line'"
+      [datasets]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
     >
-  </canvas>
+    </canvas>
+  </div>
+  <div class="col-3">
+    <canvas
+      baseChart
+      [type]="'pie'"
+      [datasets]="chartDataType"
+      [labels]="chartLabelsType"
+      [options]="chartOptionsType"
+    >
+    </canvas>
+  </div>
 </div>

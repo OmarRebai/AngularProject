@@ -11,16 +11,29 @@ import { EventCreateComponent } from './event-create/event-create.component';
 
 const routes: Routes = [
   { path: 'login', pathMatch: 'full', component: LoginComponent },
-  { path: 'members', pathMatch: 'full', component: MemberListComponent },
+  {
+    path: 'members',
+    children: [
+      { path: 'create', pathMatch: 'full', component: MemberFormComponent },
+      { path: 'edit/:id', pathMatch: 'full', component: MemberFormComponent },
+      { path: '', pathMatch: 'full', component: MemberListComponent },
+    ],
+  },
+  {
+    path: 'events',
+    children: [
+      { path: 'create', pathMatch: 'full', component: EventCreateComponent },
+      { path: 'edit/:id', pathMatch: 'full', component: EventCreateComponent }, //toDo
+      { path: '', pathMatch: 'full', component: EventsComponent },
+    ],
+  },
   { path: 'dashboard', pathMatch: 'full', component: DashboardComponent },
   { path: 'tools', pathMatch: 'full', component: ToolsComponent },
   { path: 'articles', pathMatch: 'full', component: ArticlesComponent },
-  { path: 'events', pathMatch: 'full', component: EventsComponent },
-  { path: 'event/create', pathMatch: 'full', component: EventCreateComponent },
-  { path: 'edit/:id', pathMatch: 'full', component: MemberFormComponent },
+
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  { path: 'create', pathMatch: 'full', component: MemberFormComponent },
-  { path: '**', redirectTo: 'login' },
+
+  // { path: '**', redirectTo: 'login' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

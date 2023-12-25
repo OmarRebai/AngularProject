@@ -1,5 +1,5 @@
-<div fxLayout="row" fxLayoutAlign="end center">
-  <button mat-raised-button color="primary" routerLink="/create">
+<div fxLayout="row" [style.margin]="'12px'" fxLayoutAlign="end center">
+  <button mat-raised-button color="primary" routerLink="./create">
     Create new
   </button>
 </div>
@@ -45,7 +45,7 @@
       <button
         mat-icon-button
         color="primary"
-        routerLink="/edit/{{ element.id }}"
+        routerLink="./edit/{{ element.id }}"
       >
         <mat-icon>edit</mat-icon>
       </button>

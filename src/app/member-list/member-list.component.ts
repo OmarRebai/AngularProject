@@ -3,6 +3,7 @@ import { Member } from 'src/models/member';
 import { GLOBAL } from '../app-config';
 import { MemberService } from 'src/services/member.service';
 import { MatTableDataSource } from '@angular/material/table';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-member-list',
@@ -32,9 +33,25 @@ export class MemberListComponent {
     });
   }
   handleButtonClick(id: string): void {
-    //lancer la boite
-    this.memberService.deleteMemberById(id).subscribe(() => {
-      this.fetch();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.memberService.deleteMemberById(id).subscribe(() => {
+          this.fetch();
+        });
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your file has been deleted.',
+          icon: 'success',
+        });
+      }
     });
   }
 }

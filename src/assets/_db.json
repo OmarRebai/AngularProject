@@ -6,7 +6,8 @@
       "name": "Omar",
       "createdDate": "12/12/2022",
       "cv": "lien",
-      "type": "chercheur"
+      "type": "chercheur",
+      "tab_pub": ["pub1", "pub2"]
     },
     {
       "id": "2",
@@ -14,7 +15,8 @@
       "name": "Rebai",
       "createdDate": "12/12/2022",
       "cv": "lien",
-      "type": "Enseignant"
+      "type": "Enseignant",
+      "tab_pub": ["pub1", "pub2", "pub3"]
     },
     {
       "id": "3",
@@ -22,7 +24,8 @@
       "name": "Sellami",
       "createdDate": "12/12/2022",
       "cv": "lien",
-      "type": "Enseignant"
+      "type": "Enseignant",
+      "tab_pub": ["pub1"]
     }
   ],
   "events": [

@@ -5,6 +5,7 @@ import { ToolService } from 'src/services/tool.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Tool } from 'src/models/tool';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tools',
@@ -14,11 +15,9 @@ import { Tool } from 'src/models/tool';
 export class ToolsComponent {
   constructor(private dialog: MatDialog, private toolService: ToolService) {}
 
-  displayedColumns: string[] = ['id', 'createur', 'date', 'source'];
+  displayedColumns: string[] = ['id', 'createur', 'date', 'source', 'actions'];
 
   dataSource = new MatTableDataSource(this.toolService.tab);
-
-  //tebda lenna
 
   tool!: Tool;
 
@@ -42,8 +41,6 @@ export class ToolsComponent {
     });
   }
 
-  //toufa lenna
-
   openDialog() {
     const dialogConfig = new MatDialogConfig();
 
@@ -52,8 +49,10 @@ export class ToolsComponent {
 
     const dialogRef = this.dialog.open(ToolsCreateComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-      this.addTool(data);
-      this.fetch();
+      if (!!data) {
+        this.addTool(data);
+        this.fetch();
+      }
     });
   }
 
@@ -66,10 +65,53 @@ export class ToolsComponent {
       this.dataSource = new MatTableDataSource(tab);
     });
   }
+
   handleButtonClick(id: string): void {
-    //lancer la boite
-    this.toolService.deleteToolById(id).subscribe(() => {
-      this.fetch();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.toolService.deleteToolById(id).subscribe(() => {
+          this.fetch();
+        });
+        Swal.fire({
+          title: 'Deleted!',
+          text: 'Your file has been deleted.',
+          icon: 'success',
+        });
+      }
+    });
+  }
+  editForm(id: string) {
+    this.toolService.getToolById(id).subscribe((result) => {
+      console.log(result);
+      const dialogConfig = new MatDialogConfig();
+
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+
+      const dialogRef = this.dialog.open(ToolsCreateComponent, {
+        data: {
+          date: result.date,
+          source: result.source,
+          createur: result.createur,
+        },
+      });
+      dialogRef.afterClosed().subscribe((data) => {
+        if (!!data) {
+          this.toolService.editTool(data);
+          this.fetch();
+        }
+      });
+      // this.tool.createur = result.createur;
+      // this.tool.date = result.date;
+      // this.tool.source = result.source;
     });
   }
 }

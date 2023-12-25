@@ -11,15 +11,27 @@ import { ToolService } from 'src/services/tool.service';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent {
+  tab!: number[];
+  tabType!: number[];
   chartData: ChartDataset[] = [
     {
       // ⤵️ Add these
       label: '$ in millions',
-      data: [1551, 1688, 1800, 1895, 2124, 2124],
+      data: this.getNumber(),
     },
   ];
   chartLabels: string[] = [];
   chartOptions: ChartOptions = {};
+
+  chartDataType: ChartDataset[] = [
+    {
+      // ⤵️ Add these
+      label: '$ in millions',
+      data: this.getTypeNumber(),
+    },
+  ];
+  chartLabelsType: string[] = ['Chercheur', 'Enseignant'];
+  chartOptionsType: ChartOptions = {};
 
   nbMembers: number = 0;
   nbArticles: number = 0;
@@ -35,5 +47,25 @@ export class DashboardComponent {
     // this.nbArticles = this.articleService.tab;
     this.nbTools = this.toolService.tab.length;
     this.nbEvents = this.eventService.tabEvent.length;
+
+    for (let i = 0; i < this.nbMembers; i++) {
+      this.chartLabels.push(this.memberService.tab[i].name);
+    }
+  }
+
+  getNumber(): number[] {
+    this.memberService.getNbPubMembers().subscribe((nb) => {
+      this.tab = nb;
+      return nb;
+    });
+    return this.tab;
+  }
+
+  getTypeNumber(): number[] {
+    this.memberService.getNbTypeMembers().subscribe((nb) => {
+      this.tabType = nb;
+      return nb;
+    });
+    return this.tabType;
   }
 }

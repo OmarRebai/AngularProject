@@ -39,4 +39,21 @@ export class EventService {
       observer.next(event);
     });
   }
+
+  getAllEvents(): Observable<Evenement[]> {
+    //return this.httpClient.get<Member[]>('http://localhost:9000/MEMBRE-SERVICE/members');
+
+    return new Observable((observer) => {
+      observer.next(this.tabEvent);
+    });
+  }
+
+  deleteEventById(id: string): Observable<void> {
+    //return this.httpClient.delete<void>('http://localhost:9000/MEMBRE-SERVICE/delete..'+id);
+
+    this.tabEvent = this.tabEvent.filter((item) => item.id != id);
+    return new Observable((observer) => {
+      observer.next();
+    });
+  }
 }

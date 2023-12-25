@@ -5,4 +5,5 @@ export interface Member {
   createdDate: string;
   cv: string;
   type: string;
+  tab_pub: string[];
 }
